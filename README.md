@@ -9,6 +9,10 @@ GitHub repository finder that allows users to select a programming language from
 # References
 
 1. GitHub Logo - https://github.com/logos
+2. How To Build A Dropdown Component In React - https://www.youtube.com/watch?v=qb70Epml9X0
+3. Learn React Hooks: useRef - Simply Explained! - https://www.youtube.com/watch?v=42BkpGe8oxg
+4. Detect click outside react component - https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+5. Property 'current' does not exist on type '((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement>' - https://stackoverflow.com/questions/65876809/property-current-does-not-exist-on-type-instance-htmldivelement-null
 
 # React + TypeScript + Vite
 
