@@ -6,6 +6,10 @@ GitHub repository finder that allows users to select a programming language from
 - Displayed information should include the repository name, description, number of stars, forks, and open issues.
 - Users can fetch another random repository with a button click.
 
+# References
+
+1. GitHub Logo - https://github.com/logos
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
