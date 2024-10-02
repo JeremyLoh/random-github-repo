@@ -23,7 +23,7 @@
 }
 
 .options.hide {
-  visibility: hidden;
+  display: none;
 }
 
 .options.show {
