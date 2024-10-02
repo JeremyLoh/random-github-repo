@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { Response, useFetchLanguages } from "./api/language"
+import { Response, useFetchLanguages } from "./api/useFetchLanguages"
 import "./App.css"
 import Dropdown from "./components/Dropdown"
 import Header from "./components/Header"

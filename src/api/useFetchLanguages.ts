@@ -15,7 +15,7 @@ interface Response {
 }
 
 function useFetchLanguages(
-  abortControllerRef: React.RefMutableObject<AbortController | null>
+  abortControllerRef: React.MutableRefObject<AbortController | null>
 ) {
   const [error, setError] = useState()
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -52,4 +52,5 @@ function useFetchLanguages(
   return { languages, isLoading, error }
 }
 
-export { useFetchLanguages, Response }
+export { useFetchLanguages }
+export type { Response }
