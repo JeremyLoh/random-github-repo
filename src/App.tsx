@@ -1,10 +1,14 @@
+import { useRef } from "react"
 import { Response, useFetchLanguages } from "./api/language"
 import "./App.css"
 import Dropdown from "./components/Dropdown"
 import Header from "./components/Header"
 
 function App() {
-  const { languages, isLoading, error }: Response = useFetchLanguages()
+  const abortControllerRef = useRef<AbortController | null>(null)
+  const { languages, isLoading, error }: Response =
+    useFetchLanguages(abortControllerRef)
+
   return (
     <>
       <Header />
