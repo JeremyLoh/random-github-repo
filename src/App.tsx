@@ -3,7 +3,11 @@ import Dropdown from "./components/Dropdown"
 import Header from "./components/Header"
 
 function App() {
-  const options = [{ id: 1, value: "AppleScript", title: "AppleScript" }]
+  // TODO get list of languages from API
+  const options = [
+    { id: 1, value: "AppleScript", title: "AppleScript" },
+    { id: 2, value: "Assembly", title: "Assembly" },
+  ]
   return (
     <>
       <Header />

@@ -4,23 +4,39 @@ import Language from "../model/Language"
 import useOutsideClick from "../hooks/useOutsideClick"
 
 function Dropdown({ options }: { options: Language[] }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
+  function handleSelectOption(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    setSelectedOption((event.target as HTMLButtonElement).value)
+    setIsOpen(false)
+  }
   function handleOutsideClick() {
-    // TODO handle click outside of dropdown
-    console.log("CLICK OUTSIDE DROPDOWN")
+    if (isOpen) {
+      setIsOpen(false)
+    }
   }
   useOutsideClick(dropdownRef, handleOutsideClick)
 
   return (
     <div ref={dropdownRef} className="dropdown">
       <button className="toggle" onClick={() => setIsOpen(!isOpen)}>
-        Select a Language
+        <span>{isOpen ? "-" : "+"}</span>
+        <b>{selectedOption ? selectedOption : "Select a Language"}</b>
       </button>
       <div className={`options ${isOpen ? "show" : "hide"}`}>
         {options.map((option: Language) => {
           return (
-            <button key={option.id} value={option.value}>
+            <button
+              key={option.id}
+              value={option.value}
+              className={`option ${
+                selectedOption === option.value ? "selected-option" : ""
+              }`}
+              onClick={handleSelectOption}
+            >
               {option.title}
             </button>
           )
