@@ -10,7 +10,7 @@ function Dropdown({ options }: { options: Language[] }) {
   function handleSelectOption(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
-    setSelectedOption((event.target as HTMLButtonElement).value)
+    setSelectedOption((event.target as HTMLButtonElement).innerText)
     setIsOpen(false)
   }
   function handleOutsideClick() {
