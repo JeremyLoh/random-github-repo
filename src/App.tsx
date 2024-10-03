@@ -6,6 +6,7 @@ import Dropdown from "./components/Dropdown"
 import Header from "./components/Header"
 import RepositoryCard from "./components/RepositoryCard"
 import Repository from "./model/Repository"
+import RefreshRepository from "./components/RefreshRepository"
 
 function App() {
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
@@ -19,6 +20,17 @@ function App() {
     setSelectedLanguage(language)
     setRepository(
       await fetchRandomRepository(language, repositoryAbortControllerRef)
+    )
+  }
+  async function getNewRepository() {
+    if (selectedLanguage == null) {
+      return
+    }
+    setRepository(
+      await fetchRandomRepository(
+        selectedLanguage,
+        repositoryAbortControllerRef
+      )
     )
   }
 
@@ -38,6 +50,9 @@ function App() {
             selectedLanguage={selectedLanguage}
             repository={repository}
           />
+          {repository != null ? (
+            <RefreshRepository handleClick={getNewRepository} />
+          ) : null}
         </>
       )}
     </>
