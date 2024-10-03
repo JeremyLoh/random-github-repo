@@ -3,15 +3,21 @@ import "./Dropdown.css"
 import Language from "../model/Language"
 import useOutsideClick from "../hooks/useOutsideClick"
 
-function Dropdown({ options }: { options: Language[] }) {
+function Dropdown({
+  options,
+  handleSelectOption,
+}: {
+  options: Language[]
+  handleSelectOption: (language: string) => void
+}) {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selectedOption, setSelectedOption] = useState<string | null>(null)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
-  function handleSelectOption(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    setSelectedOption((event.target as HTMLButtonElement).innerText)
+  function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const language = (event.target as HTMLButtonElement).innerText
+    setSelectedOption(language)
     setIsOpen(false)
+    handleSelectOption(language)
   }
   function handleOutsideClick() {
     if (isOpen) {
@@ -35,7 +41,7 @@ function Dropdown({ options }: { options: Language[] }) {
               className={`option ${
                 selectedOption === option.value ? "selected-option" : ""
               }`}
-              onClick={handleSelectOption}
+              onClick={handleClick}
             >
               {option.title}
             </button>
