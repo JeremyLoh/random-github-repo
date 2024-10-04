@@ -1,33 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useRef, useState } from "react"
+import "./App.css"
+import { Response, useFetchLanguages } from "./api/useFetchLanguages"
+import fetchRandomRepository from "./api/fetchRandomRepository"
+import Dropdown from "./components/Dropdown"
+import Header from "./components/Header"
+import RepositoryCard from "./components/RepositoryCard"
+import Repository from "./model/Repository"
+import RefreshRepository from "./components/RefreshRepository"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null)
+  const [repository, setRepository] = useState<Repository | null>(null)
+  const languageAbortControllerRef = useRef<AbortController | null>(null)
+  const { languages, isLoading, error }: Response = useFetchLanguages(
+    languageAbortControllerRef
+  )
+  const repositoryAbortControllerRef = useRef<AbortController | null>(null)
+  async function handleSelectLanguage(language: string) {
+    setSelectedLanguage(language)
+    setRepository(
+      await fetchRandomRepository(language, repositoryAbortControllerRef)
+    )
+  }
+  async function getNewRepository() {
+    if (selectedLanguage == null) {
+      return
+    }
+    setRepository(
+      await fetchRandomRepository(
+        selectedLanguage,
+        repositoryAbortControllerRef
+      )
+    )
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      {error ? <div>Something went wrong. Please try again later</div> : null}
+      {isLoading ? (
+        <div>LOADING...</div>
+      ) : (
+        <>
+          <Dropdown
+            options={languages}
+            handleSelectOption={handleSelectLanguage}
+          />
+          <RepositoryCard
+            selectedLanguage={selectedLanguage}
+            repository={repository}
+          />
+          {repository != null ? (
+            <RefreshRepository handleClick={getNewRepository} />
+          ) : null}
+        </>
+      )}
     </>
   )
 }

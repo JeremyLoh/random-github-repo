@@ -1,0 +1,36 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #171717;
+  background-color: #e5e5e5;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 70ch;
+}
+
+.title {
+  font-size: 1.2rem;
+  max-width: 70ch;
+}
+
+.description {
+  color: #525252;
+  max-width: 70ch;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.stat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 1.1em;
+}

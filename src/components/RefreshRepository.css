@@ -1,0 +1,15 @@
+.refresh-repository-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: whitesmoke;
+}
+
+.refresh-repository-btn:hover {
+  filter: brightness(0.9);
+}

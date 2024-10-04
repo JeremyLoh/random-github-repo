@@ -1,0 +1,39 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 0;
+}
+
+.toggle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.options button,
+.toggle {
+  border-radius: 0;
+  text-align: end;
+}
+
+.options.hide {
+  display: none;
+}
+
+.options.show {
+  visibility: visible;
+}
+
+.option:hover {
+  background-color: #d4d4d4;
+}
+
+.selected-option {
+  background-color: #d4d4d4;
+}
