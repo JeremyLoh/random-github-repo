@@ -7,6 +7,14 @@ type Response = {
   incomplete_results: boolean
 }
 
+const ORDER_CRITERIA = ["stars", "forks", "help-wanted-issues", "updated"]
+const PER_PAGE = "100"
+
+function getRandomElement<T>(array: Array<T>): T {
+  return array[(array.length * Math.random()) | 0]
+}
+
+// https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
 async function fetchRandomRepository(
   language: string,
   repositoryAbortControllerRef: React.MutableRefObject<AbortController | null>
@@ -14,19 +22,20 @@ async function fetchRandomRepository(
   repositoryAbortControllerRef.current?.abort()
   repositoryAbortControllerRef.current = new AbortController()
   const { signal } = repositoryAbortControllerRef.current
-  // https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories
   const url: string = "https://api.github.com/search/repositories"
-  // TODO random sorting so that random repo will be done, get random 10 repos, then random index select one
+  // random sorting by order criteria, then select one using random index
   const searchParams = new URLSearchParams({
     q: `language:${language}`,
-    per_page: "1",
+    sort: getRandomElement(ORDER_CRITERIA),
+    order: "desc",
+    per_page: PER_PAGE,
   })
   try {
     const response: Response = await ky
       .get(url, { searchParams, signal })
       .json()
     const items: Repository[] = response["items"]
-    return items[0] || null
+    return getRandomElement(items) || null
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     if (error.name === "AbortError") {
