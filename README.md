@@ -1,5 +1,7 @@
 # Random Github Repository
 
+![Github Repository Finder homepage example](./github-repo-finder.png)
+
 GitHub repository finder that allows users to select a programming language from a dropdown menu.
 
 - Use the GitHub Repository Search API to fetch and display a random repository that matches the selected language.
@@ -14,6 +16,7 @@ GitHub repository finder that allows users to select a programming language from
 4. Detect click outside react component - https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
 5. Property 'current' does not exist on type '((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement>' - https://stackoverflow.com/questions/65876809/property-current-does-not-exist-on-type-instance-htmldivelement-null
 6. Fetching Data in React - Complete Tutorial - https://www.youtube.com/watch?v=00lxm_doFYw
+7. Deploying a Static Site (Vite) - https://vite.dev/guide/static-deploy
 
 # React + TypeScript + Vite
 
